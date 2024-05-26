@@ -9,19 +9,20 @@ namespace Logica
     public class Mesa
     {
         Plato plato;
-        int numeroDeMesa;
+        List<int>numeroDeMesa;
         int capacidad;
         Mesero mesero;
         Producto stock;
 
-        public Mesa(Plato plato, int numeroDeMesa, int capacidad, Mesero mesero, Producto stock)
+        public Mesa(Plato plato, List<int> numeroDeMesa, int capacidad, Mesero mesero)
         {
             this.plato = plato;
             this.numeroDeMesa = numeroDeMesa;
             this.capacidad = capacidad;
             this.mesero = mesero;
-            this.stock = stock;
         }
+
+
 
     }
 }

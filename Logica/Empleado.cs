@@ -25,12 +25,19 @@ namespace Logica
         public Empleado(string nombre, string apellido, float contacto, string direccion, 
             float sueldo, ERol rol)
         {
-            this.nombre = nombre;
-            this.apellido = apellido;
-            this.contacto = contacto;
-            this.direccion = direccion;
-            this.sueldo = sueldo;
-            this.rol = rol;
+            this.Nombre = nombre;
+            this.Apellido = apellido;
+            this.Contacto = contacto;
+            this.Direccion = direccion;
+            this.Sueldo = sueldo;
+            this.Rol = rol;
         }
+
+        public string Nombre { get => nombre; set => nombre = value; }
+        public string Apellido { get => apellido; set => apellido = value; }
+        public float Contacto { get => contacto; set => contacto = value; }
+        public string Direccion { get => direccion; set => direccion = value; }
+        public float Sueldo { get => sueldo; set => sueldo = value; }
+        public ERol Rol { get => rol; set => rol = value; }
     }
 }

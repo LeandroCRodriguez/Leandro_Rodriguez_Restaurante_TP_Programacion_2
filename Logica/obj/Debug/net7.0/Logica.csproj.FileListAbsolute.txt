@@ -1,0 +1,4 @@
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Logica\obj\Debug\net7.0\Logica.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Logica\obj\Debug\net7.0\Logica.AssemblyInfoInputs.cache
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Logica\obj\Debug\net7.0\Logica.AssemblyInfo.cs
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Logica\obj\Debug\net7.0\Logica.csproj.CoreCompileInputs.cache

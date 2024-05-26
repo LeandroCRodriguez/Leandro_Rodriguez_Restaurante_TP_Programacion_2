@@ -19,8 +19,8 @@ namespace Logica
         bool mesaCerrada;
 
         public Mesero(string nombre, string apellido, float contacto, string direccion, 
-            float sueldo, ERol rol, bool mesaCerrada, bool yaPago, Mesa mesa) 
-            : base(nombre, apellido, contacto, direccion, sueldo, rol)
+            float sueldo,  bool mesaCerrada, bool yaPago, Mesa mesa) 
+            : base(nombre, apellido, contacto, direccion, sueldo, ERol.Mesero)
         {
             this.mesa = mesa;
             this.yaPago = yaPago;

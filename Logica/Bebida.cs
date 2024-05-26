@@ -10,8 +10,8 @@ namespace Logica
     public class Bebida : Producto
     {
         bool conAlcohol;
-        public Bebida(string nombre, double precio,bool conAlcohol, Dictionary<string, int> stock) 
-            : base(nombre, precio, stock)
+        public Bebida(double precio, string nombre,bool conAlcohol, int stock) 
+            : base(precio, nombre, stock)
         {
             this.conAlcohol = conAlcohol;
         }

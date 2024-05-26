@@ -10,26 +10,32 @@ namespace Logica
     {
         Plato plato;
         Producto stock;
+        private List<Plato> platosDisponibles;
 
         public Cocinero(string nombre, string apellido, float contacto, string direccion, 
-            float sueldo, ERol rol, Plato Plato, Producto stock) 
-            : base(nombre, apellido, contacto, direccion, sueldo, rol)
+            float sueldo,  Plato plato, Producto stock) 
+            : base(nombre, apellido, contacto, direccion, sueldo, ERol.Cocinero)
         {
             this.plato = plato;
             this.stock = stock;
+            platosDisponibles = new List<Plato>();
         }
 
-        public Plato CrearPlato()
+        public void CrearPlato(string nombre, List<Ingrediente> ingredientes, double tiempoDePreparacion)
         {
-            return this.plato;//Falta logica
+            Plato nuevoPlato = new Plato(nombre, tiempoDePreparacion, ingredientes);
+            platosDisponibles.Add(nuevoPlato);
+            
         }
-        public Plato ModificarPlato ()
+        public void ModificarPlato(Plato platoExistente, string nuevoNombre, double nuevoTiempoDePreparacion, List<Ingrediente> nuevosingredientes)
         {
-            return this.plato;//Falta logica
+            platoExistente.Nombre = nuevoNombre;
+            platoExistente.TiempoDePreparacion = nuevoTiempoDePreparacion;
+            platoExistente.Ingredientes = nuevosingredientes;
         }
-        public Plato EliminarPlato()
+        public void EliminarPlato(Plato plato)
         {
-            return this.plato;//Falta logica
+            platosDisponibles.Remove(plato);
         }
     }
 }
