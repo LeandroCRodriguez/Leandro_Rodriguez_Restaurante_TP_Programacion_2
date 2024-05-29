@@ -10,10 +10,13 @@ namespace Logica
     public class Bebida : Producto
     {
         bool conAlcohol;
-        public Bebida(double precio, string nombre,bool conAlcohol, int stock) 
+
+        public Bebida(double precio, string nombre, Stock stock, bool conAlcohol) 
             : base(precio, nombre, stock)
         {
             this.conAlcohol = conAlcohol;
         }
+
+        public bool ConAlcohol { get { return conAlcohol; } set { conAlcohol = value; } }
     }
 }

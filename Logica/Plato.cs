@@ -11,38 +11,40 @@ namespace Logica
     {
         string nombre;
         double tiempoDePreparacion;
-        Producto producto;
-        List<Ingrediente> ingredientes;
         int precio;
+        List<Ingrediente> ingredientes;
+        
 
 
-        public Plato(string nombre, double tiempoDePreparacion,
-            List<Ingrediente> ingredientes) 
+        public Plato(string nombre, double tiempoDePreparacion) 
         {
             this.nombre = nombre;
             this.tiempoDePreparacion = tiempoDePreparacion;
-            this.ingredientes = ingredientes;
+            ingredientes = new List<Ingrediente>();
         }
-        public Plato(int precio, string nombre, double tiempoDePreparacion,
-            List<Ingrediente> ingredientes) 
-            :this(nombre, tiempoDePreparacion, ingredientes) //constructor para el encargado
+        public Plato(int precio, string nombre, double tiempoDePreparacion) 
+            :this(nombre, tiempoDePreparacion) //constructor para el encargado
         {
             this.precio = precio;
         }
-
-        public string Nombre { get => nombre; set => nombre = value; }
-        public double TiempoDePreparacion { get => tiempoDePreparacion; set => tiempoDePreparacion = value; }
+                
+        public string Nombre { get { return nombre; } set { nombre = value; } }
+        public double TiempoDePreparacion { get { return tiempoDePreparacion; } set { tiempoDePreparacion = value; } }
         //public Producto Producto { get => producto; set => producto = value; }
 
-        public int Precio { get => precio; set => precio = value; }
-        public List<Ingrediente> Ingredientes { get => ingredientes; set => ingredientes = value; }
+        public int Precio { get { return precio; } set { precio = value; } }
+        public List<Ingrediente> Ingredientes { get { return ingredientes; } set { ingredientes = value; } }
 
+        public void AgregarIngrediente(Ingrediente ingrediente)
+        {
+            ingredientes.Add(ingrediente);
+        }
 
-        public Producto HacerMilaConPure()
+        public Producto HacerMilaConPure(Producto producto)
         {
             return producto;//Falta logica
         }
-        public Producto HacerFideosConBolognesa()
+        public Producto HacerFideosConBolognesa(Producto producto)
         {
             return producto;//Falta logica
         }

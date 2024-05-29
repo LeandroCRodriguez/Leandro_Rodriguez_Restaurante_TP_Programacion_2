@@ -42,12 +42,13 @@ namespace Logica
             this.ediasDeLaSemana = ediasDeLaSemana;
         }
 
-        public string Nombre { get => nombre; set => nombre = value; }
-        public string Cuit { get => cuit; set => cuit = value; }
-        public string Direccion { get => direccion; set => direccion = value; }
-        public string TipoDeProducto { get => tipoDeProducto; set => tipoDeProducto = value; }
-        public EMedioDePago MedioDePago { get => medioDePago; set => medioDePago = value; }
-        public EDiasDeLaSemana EdiasDeLaSemana { get => ediasDeLaSemana; set => ediasDeLaSemana = value; }
+        public string Nombre { get { return nombre; } set { nombre = value; } }
+        public string Cuit { get { return cuit; } set { cuit = value; } }
+        public string Direccion { get { return direccion; } set { direccion = value; } }
+        public string TipoDeProducto { get { return tipoDeProducto; } set { tipoDeProducto = value; } }
+        public EMedioDePago MedioDePago { get { return medioDePago; } set { medioDePago = value; } }
+        public EDiasDeLaSemana EdiasDeLaSemana { get { return ediasDeLaSemana; } set { ediasDeLaSemana = value; } }
+
 
         public string MostrarProducto()
         {

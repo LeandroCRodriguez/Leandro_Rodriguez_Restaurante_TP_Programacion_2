@@ -2,3 +2,10 @@ C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\L
 C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Logica\obj\Debug\net7.0\Logica.AssemblyInfoInputs.cache
 C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Logica\obj\Debug\net7.0\Logica.AssemblyInfo.cs
 C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Logica\obj\Debug\net7.0\Logica.csproj.CoreCompileInputs.cache
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Logica\bin\Debug\net7.0\Logica.deps.json
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Logica\bin\Debug\net7.0\Logica.dll
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Logica\bin\Debug\net7.0\Logica.pdb
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Logica\obj\Debug\net7.0\Logica.dll
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Logica\obj\Debug\net7.0\refint\Logica.dll
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Logica\obj\Debug\net7.0\Logica.pdb
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Logica\obj\Debug\net7.0\ref\Logica.dll

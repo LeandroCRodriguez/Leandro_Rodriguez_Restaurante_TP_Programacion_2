@@ -8,13 +8,18 @@ namespace Logica
 {
     public class Ingrediente
     {
-        public Producto Producto { get; set; }
-        public int Cantidad { get; set; }
+        Producto producto;
+        private int cantidad;
+                
 
         public Ingrediente(Producto producto, int cantidad)
         {
-            Producto = producto;
-            Cantidad = cantidad;
+            this.Producto = producto;
+            this.Cantidad = cantidad;
         }
+
+        public Producto Producto { get { return producto; } set { producto = value; } }
+        public int Cantidad { get { return cantidad; } set { cantidad = value; } }
+
     }
 }

@@ -6,31 +6,38 @@ namespace Logica
     {
         string nombre;
         double precio;
-        int stock;
+        Stock stock;
 
-        public Producto(string nombre,int stock)
+        public Producto(string nombre, Stock stock)
         {
             this.nombre = nombre;            
             this.stock = stock;
         }
 
-        public Producto(double precio, string nombre, int stock) :this(nombre, stock)
+        public Producto(double precio, string nombre, Stock stock) 
+            :this(nombre, stock)
         {
             this.precio = precio;
         }
 
-        public string Nombre { get { return nombre; } }
-        public double Precio { get { return precio; } }
-        public int Stock { get { return stock; } }
+        public Producto(string nombre)//Para crear lista de platos
+        {
+            this.nombre = nombre;
+        }
+
+        public string Nombre { get { return nombre; } set { nombre = value; } }
+        public double Precio { get { return precio; } set { precio = value; } }
+        public Stock Stock { get { return stock; } set { stock = value; } }
+
 
         public void IncrementarStock(int cantidad)
         {
-            stock += cantidad;
+            stock.Cantidad += cantidad;
         }
 
         public void DecrementarStock(int cantidad)
         {
-            stock -= cantidad;
+            stock.Cantidad -= cantidad;
         }
 
         public string MostrarProducto()

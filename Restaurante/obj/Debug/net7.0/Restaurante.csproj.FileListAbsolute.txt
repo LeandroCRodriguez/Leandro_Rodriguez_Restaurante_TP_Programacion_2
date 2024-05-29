@@ -2,3 +2,17 @@ C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\R
 C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Restaurante\obj\Debug\net7.0\Restaurante.AssemblyInfoInputs.cache
 C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Restaurante\obj\Debug\net7.0\Restaurante.AssemblyInfo.cs
 C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Restaurante\obj\Debug\net7.0\Restaurante.csproj.CoreCompileInputs.cache
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Restaurante\bin\Debug\net7.0\Restaurante.exe
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Restaurante\bin\Debug\net7.0\Restaurante.deps.json
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Restaurante\bin\Debug\net7.0\Restaurante.runtimeconfig.json
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Restaurante\bin\Debug\net7.0\Restaurante.dll
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Restaurante\bin\Debug\net7.0\Restaurante.pdb
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Restaurante\bin\Debug\net7.0\Logica.dll
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Restaurante\bin\Debug\net7.0\Logica.pdb
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Restaurante\obj\Debug\net7.0\Restaurante.csproj.AssemblyReference.cache
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Restaurante\obj\Debug\net7.0\Restaurante.csproj.CopyComplete
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Restaurante\obj\Debug\net7.0\Restaurante.dll
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Restaurante\obj\Debug\net7.0\refint\Restaurante.dll
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Restaurante\obj\Debug\net7.0\Restaurante.pdb
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Restaurante\obj\Debug\net7.0\Restaurante.genruntimeconfig.cache
+C:\Users\Lean\Desktop\TP Progra 2 Restaurante\TP_Restaurante_LeandroRordriguez\Restaurante\obj\Debug\net7.0\ref\Restaurante.dll
