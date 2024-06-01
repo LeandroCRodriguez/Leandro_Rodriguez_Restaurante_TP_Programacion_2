@@ -16,7 +16,6 @@ namespace Logica
         {
             this.conAlcohol = conAlcohol;
         }
-
         public bool ConAlcohol { get { return conAlcohol; } set { conAlcohol = value; } }
     }
 }

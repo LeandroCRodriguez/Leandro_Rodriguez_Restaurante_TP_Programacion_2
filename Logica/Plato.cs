@@ -39,14 +39,6 @@ namespace Logica
         {
             ingredientes.Add(ingrediente);
         }
-
-        public Producto HacerMilaConPure(Producto producto)
-        {
-            return producto;//Falta logica
-        }
-        public Producto HacerFideosConBolognesa(Producto producto)
-        {
-            return producto;//Falta logica
-        }
+       
     }
 }

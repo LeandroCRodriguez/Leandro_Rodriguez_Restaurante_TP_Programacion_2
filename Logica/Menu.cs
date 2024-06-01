@@ -20,5 +20,24 @@ namespace Logica
 
         public List<Plato> Platos { get => platos; set => platos = value; }
         public List<Bebida> Bebida { get => bebida; set => bebida = value; }
+
+        public void MostrarMenu()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("Menú del Restaurante:");
+            sb.AppendLine("Platos:");
+            foreach (var plato in platos)
+            {
+                sb.AppendLine($"- {plato.Nombre} - ${plato.Precio}");
+            }
+
+            sb.AppendLine("\nBebidas:");
+            foreach (var bebida in bebida)
+            {
+                sb.AppendLine($"- {bebida.Nombre} - ${bebida.Precio}");
+            }
+            Console.WriteLine(sb.ToString());
+        }
     }
 }

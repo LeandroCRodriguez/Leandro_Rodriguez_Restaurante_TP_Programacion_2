@@ -23,11 +23,11 @@ namespace Logica
     {
         int capacidad;
         ENumeroDeMesa enumeroDeMesa;
-        Mesero mesero;
+        Empleado mesero;
         List<Plato> platos;
         List<Bebida> bebidas;
 
-        public Mesa(ENumeroDeMesa enumeroDeMesa, int capacidad, Mesero mesero, 
+        public Mesa(ENumeroDeMesa enumeroDeMesa, int capacidad, Empleado mesero, 
             List<Plato> platos, List<Bebida> bebidas)
         {
             this.Capacidad = capacidad;
@@ -39,16 +39,9 @@ namespace Logica
 
         public int Capacidad { get { return capacidad; } set { capacidad = value; } }
         public ENumeroDeMesa EnumeroDeMesa { get { return enumeroDeMesa; } set { enumeroDeMesa = value; } }
-        public Mesero Mesero { get { return mesero; } set { mesero = value; } }
+        public Empleado Mesero { get { return mesero; } set { mesero = value; } }
         public List<Plato> Platos { get => platos; set => platos = value; }
         public List<Bebida> Bebidas { get => bebidas; set => bebidas = value; }
-
-        public Plato AsignarPlato(Plato plato)
-        {
-            return plato;//Es necesario asignar un plato acá si ya lo tengo en el constructor?
-        }
-
-
 
     }
 }

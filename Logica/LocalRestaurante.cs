@@ -11,12 +11,7 @@ namespace Logica
         public List<Plato> platosDisponibles;
         public List<Producto> stockProductos;
 
-        //public Plato ConstruirPlato(List<Producto> stockProductos, List<Plato> platosDisponibles)
-        //{
-        //    return
-        //}
-
-
+        
 
     }
 }

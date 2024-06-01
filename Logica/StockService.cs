@@ -28,10 +28,23 @@
             {
                 producto.IncrementarStock(cantidad);
             }
-        }
-        public void RealizarEgresoStock(Plato plato)
-        {
+            else
+            {
 
+            }
+        }
+        //tendría que llegarle como parámetros, las listas de
+        //PlatosDisponibles o listaDeIngredientes y StockProductos
+        public void RealizarEgresoStock(Plato plato, List<Producto> stockProductos) 
+        {
+            foreach (Ingrediente ingrediente in plato.Ingredientes)
+            {
+                int ingredienteDelPlato = ingrediente.Cantidad;
+                foreach (Producto ingredienteStock in stockProductos)
+                {                    
+                    ingredienteStock.Stock.Cantidad =- ingredienteDelPlato;
+                }
+            }
         }
     }
 }
