@@ -30,15 +30,15 @@ namespace Restaurante
             stockProductos.Add(new Producto("Aceite", new Stock(almacenTutanJamon, 5000)));
 
             //Lista de platos con sus ingredientes
-            Plato milaConPure = new Plato("Milanesa con pure", 30);
+            Plato milaConPure = new Plato(145,"Milanesa con pure", 30);
             milaConPure.AgregarIngrediente(new Ingrediente(new Producto("Bola de lomo"), 200));
             milaConPure.AgregarIngrediente(new Ingrediente(new Producto("Papa"), 200));
             
-            Plato fideosConBolognesa = new Plato("Fideos con bolognesa", 35);
+            Plato fideosConBolognesa = new Plato(110,"Fideos con bolognesa", 35);
             fideosConBolognesa.AgregarIngrediente(new Ingrediente(new Producto("Harina"), 200));
             fideosConBolognesa.AgregarIngrediente(new Ingrediente(new Producto("Carne picada"), 200));
 
-            Plato polloConEnsalada = new Plato("Pollo con ensalada", 25);
+            Plato polloConEnsalada = new Plato(125,"Pollo con ensalada", 25);
             polloConEnsalada.AgregarIngrediente(new Ingrediente(new Producto("Tomate"), 1));
             polloConEnsalada.AgregarIngrediente(new Ingrediente(new Producto("lechuga"), 100));
             polloConEnsalada.AgregarIngrediente(new Ingrediente(new Producto("pollo"), 250));
@@ -59,28 +59,94 @@ namespace Restaurante
             List<Empleado> empleados = new List<Empleado>();
             Empleado pepe = new Empleado("Pepe", "Gomez", 1587459865, "Abc123",123456,ERol.Cocinero);
             Empleado lele = new Empleado("Lele", "Peri", 1578451256, "asd 322",321654,ERol.Encargado);
-            Empleado verónica = new Empleado("Verónica", "Gomez", 1565498712, "asd 344", 654987, ERol.Mesero);
+            Empleado veronica = new Empleado("Verónica", "Gomez", 1565498712, "asd 344", 654987, ERol.Mesero);
             Empleado augusto = new Empleado("Augusto", "Perez", 1556239875, "peru 566", 659878,ERol.Delivery);
             Empleado churita = new Empleado("Churita", "Corazón", 1587541265, "chile 655",100000, ERol.Mesero);
             empleados.Add(pepe);
             empleados.Add(lele);
-            empleados.Add(verónica);
+            empleados.Add(veronica);
             empleados.Add(augusto);
             empleados.Add(churita);
 
+            //Lista de platos para asignar a la mesa (platos que pide el cliente)
+            List<Plato> platosPedidosMesaUno = new List<Plato>();
+            platosPedidosMesaUno.Add(polloConEnsalada);
+            platosPedidosMesaUno.Add(polloConEnsalada);
+            platosPedidosMesaUno.Add(milaConPure);
+            platosPedidosMesaUno.Add(milaConPure);
+
+            List<Plato> platosPedidosMesaDos = new List<Plato>();
+            platosPedidosMesaDos.Add(fideosConBolognesa);
+            platosPedidosMesaDos.Add(fideosConBolognesa);
+            platosPedidosMesaDos.Add(milaConPure);
+            platosPedidosMesaDos.Add(milaConPure);
+
+            List<Plato> platosPedidosMesaTres = new List<Plato>();
+            platosPedidosMesaTres.Add(fideosConBolognesa);
+            platosPedidosMesaTres.Add(fideosConBolognesa);
+            platosPedidosMesaTres.Add(polloConEnsalada);
+            platosPedidosMesaTres.Add(polloConEnsalada);
+
+            List<Plato> platosPedidosMesaCuatro = new List<Plato>();
+            platosPedidosMesaCuatro.Add(fideosConBolognesa);
+            platosPedidosMesaCuatro.Add(milaConPure);
+            platosPedidosMesaCuatro.Add(polloConEnsalada);
+            platosPedidosMesaCuatro.Add(fideosConBolognesa);
+
+            List<Plato> platosPedidosMesaCinco = new List<Plato>();
+            platosPedidosMesaCinco.Add(fideosConBolognesa);
+            platosPedidosMesaCinco.Add(milaConPure);
+            platosPedidosMesaCinco.Add(polloConEnsalada);
+            platosPedidosMesaCinco.Add(fideosConBolognesa);
+
+            //Lista de mesas
+            List<Mesa> mesas = new List<Mesa>();
+            try
+            {
+                MesaService mesaService = new MesaService();
+                Mesa mesaUno = mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa1, 4, churita,
+                    platosPedidosMesaUno, bebidas, stockProductos, platosDisponibles);
+                Mesa mesaDos = mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa2, 4, churita,
+                    platosPedidosMesaDos, bebidas, stockProductos, platosDisponibles);
+                Mesa mesaTres = mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa3, 4, veronica,
+                    platosPedidosMesaTres, bebidas, stockProductos, platosDisponibles);
+                Mesa mesaCuatro = mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa4, 4, veronica,
+                    platosPedidosMesaCuatro, bebidas, stockProductos, platosDisponibles);
+                Mesa mesaCinco = mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa5, 4, veronica,
+                    platosPedidosMesaCinco, bebidas, stockProductos, platosDisponibles);
+                mesas.Add(mesaUno);
+                mesas.Add(mesaDos);
+                mesas.Add(mesaTres);
+                mesas.Add(mesaCuatro);
+                mesas.Add(mesaCinco);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al asignar la mesa: {ex.Message}");
+            }            
             
-            //Para asignar un mesero a una mesa
-            Mesa unaMesa = new Mesa(ENumeroDeMesa.Mesa1,5, churita, platosDisponibles, bebidas);
+            
+            //Menu disponible
             Menu menuDisponible = new Menu(platosDisponibles, bebidas);
             menuDisponible.MostrarMenu();
-            PlatoService MiPlato = new PlatoService();
-            Plato milanesa = new Plato("Milanesa", 30);
-            MiPlato.CrearPlato(milanesa, pepe);
+
+            //En todo platoService hacer el try catch porque está la excepcion
+            try
+            {
+                PlatoService MiPlato = new PlatoService();
+                MiPlato.CrearPlato(pepe, 160, "Milanesa a la napolitana", 35);
+            }
+            catch(RolNoCompatibleExcepcion ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
 
 
-            LocalRestaurante miRestaurante = new LocalRestaurante();
+            //antes de crear un plato habría que recorrer la lista de stock y la lista de ingredientes
+            //del plato para ver si puedo asignar un plato a una mesa
 
-
+            //LocalRestaurante miRestaurante = new LocalRestaurante();
             //Agregar los métodos:
             //Agregar,Eliminar,Modificar,Consultar
             //Agregar los ID

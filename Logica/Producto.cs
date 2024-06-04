@@ -45,7 +45,7 @@ namespace Logica
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(nombre);
             sb.AppendLine(precio.ToString());
-            sb.AppendLine(stock.ToString());
+            sb.AppendLine(stock.Cantidad.ToString());
             return sb.ToString();
         }
     }

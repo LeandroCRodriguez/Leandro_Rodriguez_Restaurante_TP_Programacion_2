@@ -12,20 +12,15 @@ namespace Logica
         string nombre;
         double tiempoDePreparacion;
         int precio;
-        List<Ingrediente> ingredientes;
+        List<Ingrediente> ingredientes; //Tendría que haber puesto a la lista dentro de los parámetros?
+                                        // ¿cual es la diferencia?   
         
-
-
-        public Plato(string nombre, double tiempoDePreparacion) 
-        {
-            this.nombre = nombre;
-            this.tiempoDePreparacion = tiempoDePreparacion;
-            ingredientes = new List<Ingrediente>();
-        }
-        public Plato(int precio, string nombre, double tiempoDePreparacion) 
-            :this(nombre, tiempoDePreparacion) //constructor para el encargado
+        public Plato(int precio, string nombre, double tiempoDePreparacion)             
         {
             this.precio = precio;
+            ingredientes = new List<Ingrediente>();
+            this.nombre = nombre;
+            this.tiempoDePreparacion = tiempoDePreparacion;
         }
                 
         public string Nombre { get { return nombre; } set { nombre = value; } }
@@ -38,7 +33,6 @@ namespace Logica
         public void AgregarIngrediente(Ingrediente ingrediente)
         {
             ingredientes.Add(ingrediente);
-        }
-       
+        }    
     }
 }

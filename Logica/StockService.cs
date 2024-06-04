@@ -3,8 +3,6 @@
     public class StockService
     {
         Producto producto;
-
-
         public List<Producto> ConsultarStockVigente(List<Producto> stock)
         {
             return stock;
@@ -30,11 +28,10 @@
             }
             else
             {
-
+                throw new RolNoCompatibleExcepcion("El Rol del Empleado no tiene acceso a la solicitud");
             }
         }
-        //tendría que llegarle como parámetros, las listas de
-        //PlatosDisponibles o listaDeIngredientes y StockProductos
+        //Ver si está bien este metodo
         public void RealizarEgresoStock(Plato plato, List<Producto> stockProductos) 
         {
             foreach (Ingrediente ingrediente in plato.Ingredientes)

@@ -50,7 +50,7 @@ namespace Logica
         public EDiasDeLaSemana EdiasDeLaSemana { get { return ediasDeLaSemana; } set { ediasDeLaSemana = value; } }
 
 
-        public string MostrarProducto()
+        public string MostrarProveedor()
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"Nombre: {Nombre}");

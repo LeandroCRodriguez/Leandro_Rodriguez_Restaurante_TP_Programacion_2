@@ -29,6 +29,8 @@ namespace Logica
 
         public Mesa(ENumeroDeMesa enumeroDeMesa, int capacidad, Empleado mesero, 
             List<Plato> platos, List<Bebida> bebidas)
+            //La lista de platos y de bebidas son necesarias acá, porque las listas de la clase Menu
+            //son para mostrar justamente el menu
         {
             this.Capacidad = capacidad;
             this.EnumeroDeMesa = enumeroDeMesa;
