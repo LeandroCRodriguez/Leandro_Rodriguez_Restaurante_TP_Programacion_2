@@ -598,6 +598,16 @@
             "related": ".xml"
           }
         }
+      },
+      "Logica/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/Logica.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Logica.dll": {}
+        }
       }
     }
   },
@@ -2293,10 +2303,16 @@
         "system.threading.tasks.4.3.0.nupkg.sha512",
         "system.threading.tasks.nuspec"
       ]
+    },
+    "Logica/1.0.0": {
+      "type": "project",
+      "path": "../Logica/Logica.csproj",
+      "msbuildProject": "../Logica/Logica.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "Logica >= 1.0.0",
       "MSTest.TestAdapter >= 2.2.10",
       "MSTest.TestFramework >= 2.2.10",
       "Microsoft.NET.Test.Sdk >= 17.6.0",
@@ -2329,7 +2345,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Lean\\Desktop\\TP Progra 2 Restaurante\\TP_Restaurante_LeandroRordriguez\\Logica\\Logica.csproj": {
+              "projectPath": "C:\\Users\\Lean\\Desktop\\TP Progra 2 Restaurante\\TP_Restaurante_LeandroRordriguez\\Logica\\Logica.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

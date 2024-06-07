@@ -3,6 +3,14 @@
     public class StockService
     {
         Producto producto;
+        public StockService(Producto producto)
+        {
+            this.producto = producto;
+        }
+        public StockService()
+        {
+
+        }
         public List<Producto> ConsultarStockVigente(List<Producto> stock)
         {
             return stock;
@@ -38,8 +46,11 @@
             {
                 int ingredienteDelPlato = ingrediente.Cantidad;
                 foreach (Producto ingredienteStock in stockProductos)
-                {                    
-                    ingredienteStock.Stock.Cantidad =- ingredienteDelPlato;
+                {
+                    if(ingredienteStock.Nombre == ingrediente.Producto.Nombre)
+                    {
+                        ingredienteStock.Stock.Cantidad -= ingredienteDelPlato;
+                    }
                 }
             }
         }
