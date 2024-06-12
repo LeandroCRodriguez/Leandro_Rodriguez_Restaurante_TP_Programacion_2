@@ -10,22 +10,24 @@ namespace Logica
     public class Plato
     {
         string nombre;
-        double tiempoDePreparacion;
+        DateTime tiempoDePreparacion;
         int precio;
         List<Ingrediente> ingredientes; //Tendría que haber puesto a la lista dentro de los parámetros?
-                                        // ¿cual es la diferencia?   
-        
-        public Plato(int precio, string nombre, double tiempoDePreparacion)             
+
+        public Plato(int precio, string nombre, DateTime tiempoDePreparacion):this(nombre,tiempoDePreparacion)
         {
             this.precio = precio;
+        }
+
+        public Plato(string nombre, DateTime tiempoDePreparacion)             
+        {
             ingredientes = new List<Ingrediente>();
             this.nombre = nombre;
             this.tiempoDePreparacion = tiempoDePreparacion;
         }
                 
         public string Nombre { get { return nombre; } set { nombre = value; } }
-        public double TiempoDePreparacion { get { return tiempoDePreparacion; } set { tiempoDePreparacion = value; } }
-        //public Producto Producto { get => producto; set => producto = value; }
+        public DateTime TiempoDePreparacion { get { return tiempoDePreparacion; } set { tiempoDePreparacion = value; } }
 
         public int Precio { get { return precio; } set { precio = value; } }
         public List<Ingrediente> Ingredientes { get { return ingredientes; } set { ingredientes = value; } }

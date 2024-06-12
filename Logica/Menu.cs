@@ -27,7 +27,7 @@ namespace Logica
 
             sb.AppendLine("Menú del Restaurante:");
             sb.AppendLine("Platos:");
-            foreach (var plato in platos)
+            foreach (Plato plato in platos)
             {
                 sb.AppendLine($"- {plato.Nombre} - ${plato.Precio}");
             }

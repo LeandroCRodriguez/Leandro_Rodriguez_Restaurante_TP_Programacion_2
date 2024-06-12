@@ -4,22 +4,24 @@ namespace Logica
 {
     public class PlatoService
     {  
-        public Plato CrearPlato(Empleado empleado,int precio,string nombrePlato, int tiempoDePreparacion) 
+
+        //Para crear/editar o eliminar platos 
+        public Plato CrearPlato(Empleado empleado,string nombrePlato, DateTime tiempoDePreparacion) 
         {
             if(empleado.Rol == ERol.Cocinero)
             {                
-                return new Plato(precio, nombrePlato, tiempoDePreparacion);
+                return new Plato(nombrePlato, tiempoDePreparacion);
             }
             else
             {
                 throw new RolNoCompatibleExcepcion("El Rol del Empleado no tiene acceso a la solicitud");
             }
         }
-        public Plato EditarPlato(Empleado empleado, int precio, string nombrePlato, int tiempoDePreparacion)
+        public Plato EditarPlato(Empleado empleado, string nombrePlato, DateTime tiempoDePreparacion)
         {
             if (empleado.Rol == ERol.Cocinero)
             {
-                return new Plato(precio, nombrePlato, tiempoDePreparacion);
+                return new Plato(nombrePlato, tiempoDePreparacion);
             }
             else
             {
@@ -61,12 +63,11 @@ namespace Logica
             List<Plato> platosNoDisponibles = new List<Plato>();
             foreach (Plato plato in platosSiDisponibles)
             {
-                List<Ingrediente> ingredientes = plato.Ingredientes;
-                foreach (Ingrediente unIngrediente in ingredientes)
+                foreach (Ingrediente unIngrediente in plato.Ingredientes)
                 {
                     int cantidadEnElStock = unIngrediente.Producto.Stock.Cantidad;
                     int cantidadIngrediente = ingrediente.Cantidad;
-                    if(cantidadEnElStock < cantidadIngrediente)
+                    if(unIngrediente.Producto.Nombre == ingrediente.Producto.Nombre && cantidadEnElStock < cantidadIngrediente)
                     {
                         platosNoDisponibles.Add(plato);
                     }
@@ -74,10 +75,11 @@ namespace Logica
             }
             return platosNoDisponibles;
         }
-        public Plato EstablecerPrecioDePlato(Plato plato, Empleado empleado)
+        public Plato EstablecerPrecioDePlato(Plato plato, Empleado empleado, int nuevoPrecio)
         {
             if(empleado.Rol == ERol.Encargado)
             {
+                plato.Precio = nuevoPrecio;
                 return plato;
             }
             else

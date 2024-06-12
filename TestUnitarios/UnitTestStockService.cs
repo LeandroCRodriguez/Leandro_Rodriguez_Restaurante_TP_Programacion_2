@@ -1,4 +1,4 @@
-using Logica;
+ï»¿using Logica;
 namespace TestUnitarios
 {
     [TestClass]
@@ -7,22 +7,22 @@ namespace TestUnitarios
         [TestMethod]
         public void ConsultarStockVigente_DeberiaDevolverStockVigente()
         {
-            Proveedor carniceriaElSeniorDeLosNovillos = new Proveedor("Carniceria El Señor de los Novillos", "123456", "Ayacucho 322", "Carne", EMedioDePago.Transferencia, EDiasDeLaSemana.Martes);
-            Proveedor polleriaMartita = new Proveedor("Pollería Martita", "897845", "Venado Tuerto 655", "Pollo", EMedioDePago.Efectivo, EDiasDeLaSemana.Viernes);
+            Proveedor carniceriaElSeniorDeLosNovillos = new Proveedor("Carniceria El SeÃ±or de los Novillos", "123456", "Ayacucho 322", "Carne", EMedioDePago.Transferencia, EDiasDeLaSemana.Martes);
+            Proveedor polleriaMartita = new Proveedor("PollerÃ­a Martita", "897845", "Venado Tuerto 655", "Pollo", EMedioDePago.Efectivo, EDiasDeLaSemana.Viernes);
             List<Producto> stockProductos = new List<Producto>();
             stockProductos.Add(new Producto("Bola de lomo", new Stock(carniceriaElSeniorDeLosNovillos, 5000)));
             stockProductos.Add(new Producto("Carne picada", new Stock(carniceriaElSeniorDeLosNovillos, 6000)));
             stockProductos.Add(new Producto("Pollo", new Stock(polleriaMartita, 4500)));
             StockService stock = new StockService();
             stock.ConsultarStockVigente(stockProductos);
-            Assert.AreEqual(3, stockProductos.Count, "La cantidad de productos en el stock debería ser 3");
+            Assert.AreEqual(3, stockProductos.Count, "La cantidad de productos en el stock deberÃ­a ser 3");
         }
 
         [TestMethod]
         public void ConsultarStockPorAgotarse_DeberiaDevolverStockPorAgotarse()
         {
-            Proveedor carniceriaElSeniorDeLosNovillos = new Proveedor("Carniceria El Señor de los Novillos", "123456", "Ayacucho 322", "Carne", EMedioDePago.Transferencia, EDiasDeLaSemana.Martes);
-            Proveedor polleriaMartita = new Proveedor("Pollería Martita", "897845", "Venado Tuerto 655", "Pollo", EMedioDePago.Efectivo, EDiasDeLaSemana.Viernes);
+            Proveedor carniceriaElSeniorDeLosNovillos = new Proveedor("Carniceria El SeÃ±or de los Novillos", "123456", "Ayacucho 322", "Carne", EMedioDePago.Transferencia, EDiasDeLaSemana.Martes);
+            Proveedor polleriaMartita = new Proveedor("PollerÃ­a Martita", "897845", "Venado Tuerto 655", "Pollo", EMedioDePago.Efectivo, EDiasDeLaSemana.Viernes);
             List<Producto> stockProductos = new List<Producto>();
             stockProductos.Add(new Producto("Bola de lomo", new Stock(carniceriaElSeniorDeLosNovillos, 5000)));
             stockProductos.Add(new Producto("Carne picada", new Stock(carniceriaElSeniorDeLosNovillos, 6000)));
@@ -30,8 +30,8 @@ namespace TestUnitarios
             StockService stock = new StockService();
             List<Producto> productosPorAgotarse = stock.ConsultarStockPorAgotarse(stockProductos);
 
-            Assert.AreEqual(1, productosPorAgotarse.Count, "La cantidad de productos en el stock por agotarse debería ser 1");
-            Assert.AreEqual("Pollo", productosPorAgotarse[0].Nombre, "El producto por agotarse debería ser 'Pollo'");
+            Assert.AreEqual(1, productosPorAgotarse.Count, "La cantidad de productos en el stock por agotarse deberÃ­a ser 1");
+            Assert.AreEqual("Pollo", productosPorAgotarse[0].Nombre, "El producto por agotarse deberÃ­a ser 'Pollo'");
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace TestUnitarios
 
             stockService.RealizarIngresoDeStock(lele, 100);
 
-            Assert.AreEqual(5100, producto.Stock.Cantidad, "El stock debería haberse incrementado en 100");
+            Assert.AreEqual(5100, producto.Stock.Cantidad, "El stock deberÃ­a haberse incrementado en 100");
         }
 
         [TestMethod]
@@ -73,8 +73,8 @@ namespace TestUnitarios
 
             stockService.RealizarEgresoStock(milaConPure, stockProductos);
 
-            Assert.AreEqual(4800, producto1.Stock.Cantidad, "El stock de Bola de lomo debería haberse reducido en 200");
-            Assert.AreEqual(400, producto2.Stock.Cantidad, "El stock de Papas debería haberse reducido en 100");
+            Assert.AreEqual(4800, producto1.Stock.Cantidad, "El stock de Bola de lomo deberÃ­a haberse reducido en 200");
+            Assert.AreEqual(400, producto2.Stock.Cantidad, "El stock de Papas deberÃ­a haberse reducido en 100");
         }
     }
 }
