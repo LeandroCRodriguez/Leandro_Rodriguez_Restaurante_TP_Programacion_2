@@ -42,10 +42,10 @@ namespace Logica
 
         public string MostrarProducto()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine(nombre);
-            sb.AppendLine(precio.ToString());
-            sb.AppendLine(stock.Cantidad.ToString());
+            StringBuilder sb = new StringBuilder();            
+            sb.AppendLine($"Nombre: {this.nombre}");
+            sb.AppendLine($"Precio: {precio.ToString()}");
+            sb.AppendLine($"Cantidad: {stock.Cantidad.ToString()}");
             return sb.ToString();
         }
     }

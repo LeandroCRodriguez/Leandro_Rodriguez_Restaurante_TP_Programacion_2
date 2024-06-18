@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,7 +19,8 @@ namespace Logica
 
         public double arcas { get; set; }
 
-
+        private Dictionary<ENumeroDeMesa, List<Plato>> platosPorMesa;
+        
         private List<Plato> platosMesaUno;
         private List<Plato> platosMesaDos;
         private List<Plato> platosMesaTres;
@@ -36,6 +38,16 @@ namespace Logica
             this.Mesas = new List<Mesa>();
             this.arcas = arcas;
 
+            platosPorMesa = new Dictionary<ENumeroDeMesa, List<Plato>>
+            {
+                { ENumeroDeMesa.Mesa1, new List<Plato>() },
+                { ENumeroDeMesa.Mesa2, new List<Plato>() },
+                { ENumeroDeMesa.Mesa3, new List<Plato>() },
+                { ENumeroDeMesa.Mesa4, new List<Plato>() },
+                { ENumeroDeMesa.Mesa5, new List<Plato>() }
+            };
+
+
         }
 
         public void InicializarDatos()
@@ -51,32 +63,32 @@ namespace Logica
             Proveedores.Add(almacenTutanJamon);
 
             //Inicializar Stock de Productos 
-            StockProductos.Add(new Producto("Bola de lomo", new Stock(carniceriaElSeniorDeLosNovillos, 5000)));
-            StockProductos.Add(new Producto("Carne picada", new Stock(carniceriaElSeniorDeLosNovillos, 6000)));
-            StockProductos.Add(new Producto("Pollo", new Stock(polleriaMartita, 4500)));
-            StockProductos.Add(new Producto("Huevos", new Stock(polleriaMartita, 4500)));
-            StockProductos.Add(new Producto("Papa", new Stock(verduleriaHabemusPapa, 3000)));
-            StockProductos.Add(new Producto("Tomates", new Stock(verduleriaHabemusPapa, 3000)));
-            StockProductos.Add(new Producto("Harina", new Stock(almacenTutanJamon, 5000)));
-            StockProductos.Add(new Producto("Aceite", new Stock(almacenTutanJamon, 5000)));
-
+            StockProductos.Add(new Producto(200, "Bola de lomo", new Stock(carniceriaElSeniorDeLosNovillos, 5000)));
+            StockProductos.Add(new Producto(150,"Carne picada", new Stock(carniceriaElSeniorDeLosNovillos, 6000)));
+            StockProductos.Add(new Producto(180,"Pollo", new Stock(polleriaMartita, 4500)));
+            StockProductos.Add(new Producto(180,"Huevos", new Stock(polleriaMartita, 4500)));
+            StockProductos.Add(new Producto(25, "Papa", new Stock(verduleriaHabemusPapa, 3000)));
+            StockProductos.Add(new Producto(100, "Tomates", new Stock(verduleriaHabemusPapa, 3000)));
+            StockProductos.Add(new Producto(25, "Harina", new Stock(almacenTutanJamon, 5000)));
+            StockProductos.Add(new Producto(50, "Aceite", new Stock(almacenTutanJamon, 40)));
+            StockProductos.Add(new Producto(80, "Queso", new Stock(almacenTutanJamon, 2000)));
 
 
             //Inicializar Platos
-            Plato milaConPure = new Plato(145, "Milanesa con pure", DateTime.Now.AddMinutes(30));
+            Plato milaConPure = new Plato(145, "Milanesa con pure", 30);
             milaConPure.AgregarIngrediente(new Ingrediente(new Producto("Bola de lomo"), 200));
             milaConPure.AgregarIngrediente(new Ingrediente(new Producto("Papa"), 200));
 
-            Plato fideosConBolognesa = new Plato(110, "Fideos con bolognesa", DateTime.Now.AddMinutes(35));
+            Plato fideosConBolognesa = new Plato(110, "Fideos con bolognesa", 35);
             fideosConBolognesa.AgregarIngrediente(new Ingrediente(new Producto("Harina"), 200));
             fideosConBolognesa.AgregarIngrediente(new Ingrediente(new Producto("Carne picada"), 200));
 
-            Plato polloConEnsalada = new Plato(125, "Pollo con ensalada", DateTime.Now.AddMinutes(25));
+            Plato polloConEnsalada = new Plato(125, "Pollo con ensalada", 25);
             polloConEnsalada.AgregarIngrediente(new Ingrediente(new Producto("Tomate"), 100));
             polloConEnsalada.AgregarIngrediente(new Ingrediente(new Producto("lechuga"), 100));
             polloConEnsalada.AgregarIngrediente(new Ingrediente(new Producto("pollo"), 250));
 
-            Plato lasagnaDeVerduras = new Plato(125, "Lasagna de verduras", DateTime.Now.AddMinutes(40));
+            Plato lasagnaDeVerduras = new Plato(125, "Lasagna de verduras", 40);
             lasagnaDeVerduras.AgregarIngrediente(new Ingrediente(new Producto("Tomate"), 100));
             lasagnaDeVerduras.AgregarIngrediente(new Ingrediente(new Producto("harina"), 150));
             lasagnaDeVerduras.AgregarIngrediente(new Ingrediente(new Producto("espinaca"), 250));
@@ -122,57 +134,40 @@ namespace Logica
                 Console.WriteLine($"Error al asignar la mesa: {ex.Message}");
             }            
         }
-
-        public List<Plato> CrearPlatosPedidosPorConsola()
+        
+        public List<Plato> AgregarPlatosPedidosParaMesas(string nombrePlato, ENumeroDeMesa mesa)
         {
             List<Plato> platosPedidos = new List<Plato>();
-
-            while (true)
+            Plato platoEncontrado = null;
+            foreach (Plato plato in PlatosDisponibles)
             {
-                Console.WriteLine("Ingrese el nombre del plato (o 'fin' para terminar):");
-                string nombrePlato = Console.ReadLine();
-                if (nombrePlato == "fin")
+                if (nombrePlato == plato.Nombre)
                 {
-                    break;
+                    platoEncontrado = plato;
+                    //Realizo egreso de stock
+                    StockService stokService = new StockService();
+                    stokService.RealizarEgresoStock(platoEncontrado, StockProductos);
                 }
-                Plato platoEncontrado = null;
-                foreach (Plato plato in PlatosDisponibles)
+            }
+            try
+            {
+                if (platoEncontrado != null && platosPorMesa.ContainsKey(mesa))
                 {
-                    if (nombrePlato == plato.Nombre)
-                    {
-                        platoEncontrado = plato;
-                        //Realizo egreso de stock
-                        StockService stokService = new StockService();
-                        stokService.RealizarEgresoStock(platoEncontrado, StockProductos);
-                    }
-                }
-                try
-                {
-                    if (platoEncontrado != null)
-                {
+                    platosPorMesa[mesa].Add(platoEncontrado);
                     platosPedidos.Add(platoEncontrado);
-                    Console.WriteLine($"Plato '{nombrePlato}' agregado.");
+                    Console.WriteLine($"Platos '{platoEncontrado.Nombre}' agregados a mesa {(int)mesa}.");
                 }
                 else
                 {
-                    Console.WriteLine($"Plato '{nombrePlato}' no encontrado en el menú.");
+                    Console.WriteLine($"Plato '{nombrePlato}' no encontrado en el menú o mesa no válida.");
                 }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error al agregar plato: {ex.Message}");
-                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al agregar plato: {ex.Message}");
             }
 
             return platosPedidos;
-        }
-        public void CrearPlatosPedidosParaMesas()
-        {
-            platosMesaUno = CrearPlatosPedidosPorConsola();
-            platosMesaDos = CrearPlatosPedidosPorConsola();
-            platosMesaTres = CrearPlatosPedidosPorConsola();
-            platosMesaCuatro = CrearPlatosPedidosPorConsola();
-            platosMesaCinco = CrearPlatosPedidosPorConsola();
         }
         
         public Empleado ObtenerEmpleadoPorNombre(string nombre)

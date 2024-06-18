@@ -1,27 +1,45 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Logica
 {
     public class PlatoService
-    {  
-
+    {
         //Para crear/editar o eliminar platos 
-        public Plato CrearPlato(Empleado empleado,string nombrePlato, DateTime tiempoDePreparacion) 
+        public Plato CrearPlato(Empleado empleado,string nombrePlato, int tiempoDePreparacion) 
         {
             if(empleado.Rol == ERol.Cocinero)
-            {                
-                return new Plato(nombrePlato, tiempoDePreparacion);
+            {
+                
+                return new Plato(nombrePlato, tiempoDePreparacion);                
             }
             else
             {
                 throw new RolNoCompatibleExcepcion("El Rol del Empleado no tiene acceso a la solicitud");
             }
         }
-        public Plato EditarPlato(Empleado empleado, string nombrePlato, DateTime tiempoDePreparacion)
+        public Plato EditarPlato(Empleado empleado, string nombrePlato, int tiempoDePreparacion, List<Plato> platos)
         {
             if (empleado.Rol == ERol.Cocinero)
             {
-                return new Plato(nombrePlato, tiempoDePreparacion);
+                Plato platoEncontrado = null;
+                foreach (Plato plato in platos)
+                {
+                    if(plato.Nombre == nombrePlato)
+                    {
+                        platoEncontrado = plato;
+                    }
+                    
+                }
+                if (platoEncontrado != null)
+                {
+                    EliminarPlato(platoEncontrado, empleado, platos);
+                    return new Plato(nombrePlato, tiempoDePreparacion);
+                }
+                else
+                {
+                    throw new Exception("Plato no encontrado");
+                }
             }
             else
             {
@@ -87,5 +105,6 @@ namespace Logica
                 throw new RolNoCompatibleExcepcion("El Rol del Empleado no tiene acceso a la solicitud");
             }
         }
+        
     }
 }
