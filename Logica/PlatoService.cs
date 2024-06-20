@@ -50,6 +50,7 @@ namespace Logica
         {
             if (empleado.Rol == ERol.Cocinero)
             {
+                Console.WriteLine($"El plato {plato.Nombre}");
                 return platos.Remove(plato);
             }
             else

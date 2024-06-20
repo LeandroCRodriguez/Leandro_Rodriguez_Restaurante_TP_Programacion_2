@@ -20,6 +20,7 @@ namespace Logica
         public double arcas { get; set; }
 
         private Dictionary<ENumeroDeMesa, List<Plato>> platosPorMesa;
+
         
         private List<Plato> platosMesaUno;
         private List<Plato> platosMesaDos;
@@ -46,8 +47,6 @@ namespace Logica
                 { ENumeroDeMesa.Mesa4, new List<Plato>() },
                 { ENumeroDeMesa.Mesa5, new List<Plato>() }
             };
-
-
         }
 
         public void InicializarDatos()
@@ -123,38 +122,38 @@ namespace Logica
             try
             {
                 MesaService mesaService = new MesaService();
-                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa1, 4, ObtenerEmpleadoPorNombre("Churita"), platosMesaUno, Bebidas, StockProductos, PlatosDisponibles));
-                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa2, 4, ObtenerEmpleadoPorNombre("Churita"), platosMesaDos, Bebidas, StockProductos, PlatosDisponibles));
-                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa3, 4, ObtenerEmpleadoPorNombre("Verónica"), platosMesaTres, Bebidas, StockProductos, PlatosDisponibles));
-                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa4, 4, ObtenerEmpleadoPorNombre("Verónica"), platosMesaCuatro, Bebidas, StockProductos, PlatosDisponibles));
-                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa5, 4, ObtenerEmpleadoPorNombre("Verónica"), platosMesaCinco, Bebidas, StockProductos, PlatosDisponibles));
+                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa1, 4, ObtenerEmpleadoPorNombre("Churita"), platosPorMesa[ENumeroDeMesa.Mesa1], Bebidas, StockProductos, PlatosDisponibles));
+                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa2, 4, ObtenerEmpleadoPorNombre("Churita"), platosPorMesa[ENumeroDeMesa.Mesa2], Bebidas, StockProductos, PlatosDisponibles));
+                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa3, 4, ObtenerEmpleadoPorNombre("Verónica"), platosPorMesa[ENumeroDeMesa.Mesa3], Bebidas, StockProductos, PlatosDisponibles));
+                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa4, 4, ObtenerEmpleadoPorNombre("Verónica"), platosPorMesa[ENumeroDeMesa.Mesa4], Bebidas, StockProductos, PlatosDisponibles));
+                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa5, 4, ObtenerEmpleadoPorNombre("Augusto"), platosPorMesa[ENumeroDeMesa.Mesa5], Bebidas, StockProductos, PlatosDisponibles));
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al asignar la mesa: {ex.Message}");
-            }            
+            }
         }
-        
-        public List<Plato> AgregarPlatosPedidosParaMesas(string nombrePlato, ENumeroDeMesa mesa)
+
+
+        public void AgregarPlatoPedidoParaMesa(string nombrePlato, ENumeroDeMesa mesa)
         {
-            List<Plato> platosPedidos = new List<Plato>();
             Plato platoEncontrado = null;
             foreach (Plato plato in PlatosDisponibles)
             {
                 if (nombrePlato == plato.Nombre)
                 {
-                    platoEncontrado = plato;
-                    //Realizo egreso de stock
-                    StockService stokService = new StockService();
-                    stokService.RealizarEgresoStock(platoEncontrado, StockProductos);
+                    platoEncontrado = plato;                    
                 }
             }
             try
             {
-                if (platoEncontrado != null && platosPorMesa.ContainsKey(mesa))
+                if (platoEncontrado != null)
                 {
-                    platosPorMesa[mesa].Add(platoEncontrado);
-                    platosPedidos.Add(platoEncontrado);
+                    if(!platosPorMesa.ContainsKey(mesa))
+                    {
+                        platosPorMesa[mesa] = new List<Plato>();
+                    }
+                    platosPorMesa[mesa].Add(platoEncontrado);                    
                     Console.WriteLine($"Platos '{platoEncontrado.Nombre}' agregados a mesa {(int)mesa}.");
                 }
                 else
@@ -165,9 +164,7 @@ namespace Logica
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al agregar plato: {ex.Message}");
-            }
-
-            return platosPedidos;
+            }            
         }
         
         public Empleado ObtenerEmpleadoPorNombre(string nombre)
@@ -182,65 +179,67 @@ namespace Logica
             throw new Exception($"Empleado con nombre {nombre} no encontrado.");
         }
 
-        //  Las funcionalidades que nos piden ofrecer son: 
-        //● Consumo de delivery únicamente.
-        //● Consultar el estado actual de una mesa en particular (consumo no pagado). ● Registrar el consumo por medio de pago(consultas individuales). 
-        //● Consumo por mesero.
-        //● Top 3 de ventas(incluye meseros y delivery). 
-        //public double ConsumoTotal()
-        //{
-        //    double consumoTotal = 0;
-        //    foreach (Plato plato in platosMesaUno)
-        //    {
-        //        consumoTotal += plato.Precio;
-        //        arcas += plato.Precio;
-        //    }
-        //    foreach (Plato plato in platosMesaDos)
-        //    {
-        //        consumoTotal += plato.Precio;
-        //        arcas += plato.Precio;
-        //    }
-        //    foreach (Plato plato in platosMesaTres)
-        //    {
-        //        consumoTotal += plato.Precio;
-        //        arcas += plato.Precio;
-        //    }
-        //    foreach (Plato plato in platosMesaCuatro)
-        //    {
-        //        consumoTotal += plato.Precio;
-        //        arcas += plato.Precio;
-        //    }
-        //    foreach (Plato plato in platosMesaCinco)
-        //    {
-        //        consumoTotal += plato.Precio;
-        //        arcas += plato.Precio;
-        //    }
-        //    return consumoTotal;
-        //}
-
-
-        //Creo que está bien este metodo, sino hay uno re largo arriba que no contempla aún el consumo del delivery
-        public double ConsumoTotal(bool soloDelivery = false)
+        public void CalcularConsumoTotal()
         {
             double consumoTotal = 0;
-            double consumoTotalDelivery = 0;
 
             foreach (Mesa mesa in Mesas)
             {
-                foreach (Plato plato in mesa.Platos)
+                if (mesa.Platos != null)
                 {
-                    if(soloDelivery == true || mesa.Mesero.Rol == ERol.Delivery)
-                    {
-                        consumoTotalDelivery += plato.Precio;
-                    }
-                    else
+                        foreach (Plato plato in mesa.Platos)
                     {
                         consumoTotal += plato.Precio;
                     }
                 }
+                else
+                {
+                    Console.WriteLine($"La mesa {(int)mesa.EnumeroDeMesa} no tiene platos asignados.");
+                }
             }
-            arcas += consumoTotal + consumoTotalDelivery;
-            return consumoTotal + consumoTotalDelivery;
-        }                
+            arcas += consumoTotal;
+            Console.WriteLine($"Total recaudado hoy: {consumoTotal}");
+            Console.WriteLine($"Arcas actuales: {arcas}");
+        }
+                    
+        //public void CalcularConsumoDelivery()
+        //{
+        //    double consumoTotalDelivery = 0;
+        //    foreach (Mesa mesa in Mesas)
+        //    {
+        //        if (mesa.Mesero.Rol == ERol.Delivery)
+        //        {
+        //            if (mesa.Platos != null)
+        //            {
+        //                    foreach (Plato plato in mesa.Platos)
+        //                {
+        //                    consumoTotalDelivery += plato.Precio;
+        //                }
+        //            }
+        //            else
+        //            {
+        //                Console.WriteLine($"La mesa {mesa.EnumeroDeMesa} no tiene platos asignados.");
+        //            }
+        //        }
+        //    }
+        //    Console.WriteLine($"Total recaudado por delivery hoy: {consumoTotalDelivery}");
+        //}
+
+        public void PagarProveedor(Producto producto)
+        {
+            if(arcas >= producto.Precio)
+            {
+                this.arcas -= producto.Precio;
+                Console.WriteLine($"Pago realizado al proveedor {producto.Stock.Proveedor.Nombre} por {producto.Precio}. Arcas restantes: {arcas}.");
+            }
+            else
+            {
+                double cuentaCorriente = producto.Precio - arcas;
+                arcas = 0;
+                Proveedor proveedorCuentaCorriente = producto.Stock.Proveedor;
+                proveedorCuentaCorriente.CuentaCorriente += cuentaCorriente;
+                Console.WriteLine($"Fondos insuficientes. Se ha agregado {cuentaCorriente} a la cuenta corriente del proveedor {proveedorCuentaCorriente.Nombre}.");
+            }
+        }        
     }
 }

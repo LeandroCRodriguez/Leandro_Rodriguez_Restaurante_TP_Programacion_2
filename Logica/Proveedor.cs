@@ -40,6 +40,7 @@ namespace Logica
             this.tipoDeProducto = tipoDeProducto;
             this.medioDePago = medioDePago;
             this.ediasDeLaSemana = ediasDeLaSemana;
+            CuentaCorriente = null;
         }
 
         public string Nombre { get { return nombre; } set { nombre = value; } }
@@ -49,6 +50,7 @@ namespace Logica
         public EMedioDePago MedioDePago { get { return medioDePago; } set { medioDePago = value; } }
         public EDiasDeLaSemana EdiasDeLaSemana { get { return ediasDeLaSemana; } set { ediasDeLaSemana = value; } }
 
+        public double? CuentaCorriente { get; internal set; }
 
         public string MostrarProveedor()
         {

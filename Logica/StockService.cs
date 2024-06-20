@@ -50,6 +50,7 @@
                     if(ingredienteStock.Nombre == ingrediente.Producto.Nombre)
                     {
                         ingredienteStock.Stock.Cantidad -= ingredienteDelPlato;
+                        Console.WriteLine($"Egreso de {ingrediente.Cantidad} de {ingredienteStock.Nombre} para el plato {plato.Nombre}. Stock restante: {ingredienteStock.Stock.Cantidad}");
                     }
                 }
             }
