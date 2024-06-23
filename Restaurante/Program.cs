@@ -13,7 +13,7 @@ namespace Restaurante
             Menu menuDisponible = new Menu(restaurante.PlatosDisponibles, restaurante.Bebidas);
             menuDisponible.MostrarMenu();
 
-            //INGRESAR PRODUCTOS Y PAGARLE AL PROVEEDOR 
+            //INGRESAR PRODUCTOS Y PAGARLE AL PROVEEDOR. YA LO PROBÉ CON FONDOS INSUFICIENTES
             Proveedor pescaderiaLosPollosHermanos = new Proveedor("Pescaderia los Pollos Hermanos", "555222", "La pampa 244", "Merluza", EMedioDePago.Efectivo, EDiasDeLaSemana.Jueves);
             Producto merluza = new Producto(200, "Merluza", new Stock(pescaderiaLosPollosHermanos, 5000));
             restaurante.StockProductos.Add(merluza);
@@ -107,29 +107,28 @@ namespace Restaurante
 
             //CONSUMO TOTAL Y DELIVERY
             restaurante.CalcularConsumoTotal();
-            //restaurante.CalcularConsumoDelivery();
+            restaurante.CalcularConsumoDelivery();
 
-           
+            //PAGAR SUELDOS A EMPLEADOS POR ORDEN
+            restaurante.PagarSueldosAEmpleados(lele);
 
-            // Asignar mesas no funciona correctamente
             //FUNCIONALIDADES
             //Ingresar Productos ✓
             //Descontar productos cuando se sirven en la mesa  ✓
             //Consulta stock vigente ✓
             //Consulta stock por agotarse ✓
             //COMIDA
-            //ABM Platos ✓ Faltaría ver el metodo EliminarPlato()
+            //ABM Platos ✓ Faltaría ver el metodo EliminarPlato() ✓
             //Consulta platos por producto ✓
             //Consulta platos disponibles ✓
             //CONTABILIDAD
             //Pago a proveedores ✓
-            //Pago por orden de prioridad
+            //Pago por orden de prioridad ✓
             //Consumo total ✓
             //consumo Delivery y mesero ✓
-            //consumo no pago
+            //consumo no pago 
             //consumo por medio de pago
             //Top 3 ventas
-
         }
     }
 }

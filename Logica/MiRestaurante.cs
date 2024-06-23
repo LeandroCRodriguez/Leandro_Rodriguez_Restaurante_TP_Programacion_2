@@ -187,7 +187,7 @@ namespace Logica
             {
                 if (mesa.Platos != null)
                 {
-                        foreach (Plato plato in mesa.Platos)
+                    foreach (Plato plato in mesa.Platos)
                     {
                         consumoTotal += plato.Precio;
                     }
@@ -201,29 +201,29 @@ namespace Logica
             Console.WriteLine($"Total recaudado hoy: {consumoTotal}");
             Console.WriteLine($"Arcas actuales: {arcas}");
         }
-                    
-        //public void CalcularConsumoDelivery()
-        //{
-        //    double consumoTotalDelivery = 0;
-        //    foreach (Mesa mesa in Mesas)
-        //    {
-        //        if (mesa.Mesero.Rol == ERol.Delivery)
-        //        {
-        //            if (mesa.Platos != null)
-        //            {
-        //                    foreach (Plato plato in mesa.Platos)
-        //                {
-        //                    consumoTotalDelivery += plato.Precio;
-        //                }
-        //            }
-        //            else
-        //            {
-        //                Console.WriteLine($"La mesa {mesa.EnumeroDeMesa} no tiene platos asignados.");
-        //            }
-        //        }
-        //    }
-        //    Console.WriteLine($"Total recaudado por delivery hoy: {consumoTotalDelivery}");
-        //}
+
+        public void CalcularConsumoDelivery()
+        {
+            double consumoTotalDelivery = 0;
+            foreach (Mesa mesa in Mesas)
+            {
+                if (mesa.Mesero.Rol == ERol.Delivery)
+                {
+                    if (mesa.Platos != null)
+                    {
+                        foreach (Plato plato in mesa.Platos)
+                        {
+                            consumoTotalDelivery += plato.Precio;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"La mesa {mesa.EnumeroDeMesa} no tiene platos asignados.");
+                    }
+                }
+            }
+            Console.WriteLine($"Total recaudado por delivery hoy: {consumoTotalDelivery}");
+        }
 
         public void PagarProveedor(Producto producto)
         {
@@ -240,6 +240,64 @@ namespace Logica
                 proveedorCuentaCorriente.CuentaCorriente += cuentaCorriente;
                 Console.WriteLine($"Fondos insuficientes. Se ha agregado {cuentaCorriente} a la cuenta corriente del proveedor {proveedorCuentaCorriente.Nombre}.");
             }
-        }        
+        }             
+        public void PagarSueldosAEmpleados(Empleado empleado)
+        {
+            int sueldoEncargado = 2000;
+            int sueldoCocinero = 1500;
+            int sueldoMesero = 1000;
+            int sueldoDelivery = 800;
+
+            List<Empleado> encargados = new List<Empleado>();
+            List<Empleado> cocineros = new List<Empleado>();
+            List<Empleado> meseros = new List<Empleado>();
+            List<Empleado> deliverys = new List<Empleado>();
+
+            if (empleado.Rol == ERol.Encargado)
+            {
+                foreach (Empleado unEmpleado in Empleados)
+                {
+                    switch (unEmpleado.Rol)
+                    {
+                        case ERol.Encargado:
+                            encargados.Add(unEmpleado);
+                            break;
+                        case ERol.Cocinero:
+                            cocineros.Add(unEmpleado);
+                            break;
+                        case ERol.Mesero:
+                            meseros.Add(unEmpleado);
+                            break;
+                        case ERol.Delivery:
+                            deliverys.Add(unEmpleado);
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                throw new RolNoCompatibleExcepcion("El Rol del Empleado no tiene acceso a la solicitud");
+            }
+            PagarSueldos(encargados, sueldoEncargado);
+            PagarSueldos(cocineros, sueldoCocinero);
+            PagarSueldos(meseros, sueldoMesero);
+            PagarSueldos(deliverys, sueldoDelivery);
+        }
+        public void PagarSueldos(List<Empleado> empleados, int sueldo)
+        {
+            foreach (Empleado unEmpleado in empleados)
+            {
+                if (this.arcas >= sueldo)
+                {
+                    unEmpleado.Sueldo += sueldo;
+                    this.arcas -= sueldo;
+                    Console.WriteLine($"Sueldo de {sueldo} pagado a {unEmpleado.Nombre} ({unEmpleado.Rol}). Arcas restantes: {this.arcas}");
+                }
+                else
+                {
+                    Console.WriteLine($"No hay suficiente dinero para pagar a {unEmpleado.Nombre} ({unEmpleado.Rol}). Arcas restantes: {this.arcas}");
+                }
+            }
+        }
     }
 }

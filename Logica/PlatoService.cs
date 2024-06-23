@@ -5,7 +5,6 @@ namespace Logica
 {
     public class PlatoService
     {
-        //Para crear/editar o eliminar platos 
         public Plato CrearPlato(Empleado empleado,string nombrePlato, int tiempoDePreparacion) 
         {
             if(empleado.Rol == ERol.Cocinero)
@@ -105,7 +104,6 @@ namespace Logica
             {
                 throw new RolNoCompatibleExcepcion("El Rol del Empleado no tiene acceso a la solicitud");
             }
-        }
-        
+        }        
     }
 }
