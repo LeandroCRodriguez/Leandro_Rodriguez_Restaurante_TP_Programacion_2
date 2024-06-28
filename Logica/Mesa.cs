@@ -27,6 +27,10 @@ namespace Logica
         List<Plato> platos;
         List<Bebida> bebidas;
         bool estadoMesa;
+        //EMedioDePagoCliente medioDePago;
+        double totalVentas;
+
+
 
         public Mesa(ENumeroDeMesa enumeroDeMesa, int capacidad, Empleado mesero, 
             List<Plato> platos, List<Bebida> bebidas)
@@ -39,6 +43,7 @@ namespace Logica
             this.Platos = platos;
             this.Bebidas = bebidas;
             this.EstadoMesa = true;
+            this.totalVentas = 0;
         }
         public int Capacidad { get { return capacidad; } set { capacidad = value; } }
         public ENumeroDeMesa EnumeroDeMesa { get { return enumeroDeMesa; } set { enumeroDeMesa = value; } }
@@ -46,5 +51,7 @@ namespace Logica
         public List<Plato> Platos { get => platos; set => platos = value; }
         public List<Bebida> Bebidas { get => bebidas; set => bebidas = value; }
         public bool EstadoMesa { get => estadoMesa; set => estadoMesa = value; }
+        public double TotalVentas { get => totalVentas; set => totalVentas = value; }
+        //public EMedioDePagoCliente MedioDePago { get => medioDePago; set => medioDePago = value; }
     }
 }

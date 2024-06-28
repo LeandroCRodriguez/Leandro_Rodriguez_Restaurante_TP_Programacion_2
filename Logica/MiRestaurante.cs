@@ -9,6 +9,12 @@ using System.Threading.Tasks;
 
 namespace Logica
 {
+    public enum EMedioDePagoCliente
+    {
+        BilleteraVirtual,
+        Contado,
+        TarjetaCredito,
+    }
     public class MiRestaurante
     {
         public List<Proveedor> Proveedores { get;  set; }
@@ -22,8 +28,8 @@ namespace Logica
 
         private Dictionary<ENumeroDeMesa, List<Plato>> platosPorMesa;
         private Dictionary<ENumeroDeMesa, List<Bebida>> bebidasPorMesa;
-        
 
+        
 
         public MiRestaurante(double arcas)
         {
@@ -56,10 +62,10 @@ namespace Logica
         public void InicializarDatos()
         {
             //Inicializar Proveedores
-            Proveedor carniceriaElSeniorDeLosNovillos = new Proveedor("Carniceria El Señor de los Novillos", "123456", "Ayacucho 322", "Carne", EMedioDePago.Transferencia, EDiasDeLaSemana.Martes);
-            Proveedor polleriaMartita = new Proveedor("Pollería Martita", "897845", "Venado Tuerto 655", "Pollo", EMedioDePago.Efectivo, EDiasDeLaSemana.Viernes);
-            Proveedor verduleriaHabemusPapa = new Proveedor("Verdulería Habemus Papa", "789456", "La plumita 1243", "Papa", EMedioDePago.Contado, EDiasDeLaSemana.Miercoles);
-            Proveedor almacenTutanJamon = new Proveedor("Almacén Tutan Jamón", "123456", "Ayacucho 322", "Carne", EMedioDePago.Efectivo, EDiasDeLaSemana.Jueves);
+            Proveedor carniceriaElSeniorDeLosNovillos = new Proveedor("Carniceria El Señor de los Novillos", "123456", "Ayacucho 322", "Carne", EMedioDePagoProveedor.Transferencia, EDiasDeLaSemana.Martes);
+            Proveedor polleriaMartita = new Proveedor("Pollería Martita", "897845", "Venado Tuerto 655", "Pollo", EMedioDePagoProveedor.Efectivo, EDiasDeLaSemana.Viernes);
+            Proveedor verduleriaHabemusPapa = new Proveedor("Verdulería Habemus Papa", "789456", "La plumita 1243", "Papa", EMedioDePagoProveedor.Contado, EDiasDeLaSemana.Miercoles);
+            Proveedor almacenTutanJamon = new Proveedor("Almacén Tutan Jamón", "123456", "Ayacucho 322", "Carne", EMedioDePagoProveedor.Efectivo, EDiasDeLaSemana.Jueves);
             Proveedores.Add(carniceriaElSeniorDeLosNovillos);
             Proveedores.Add(polleriaMartita);
             Proveedores.Add(verduleriaHabemusPapa);
@@ -137,38 +143,7 @@ namespace Logica
                 Console.WriteLine($"Error al asignar la mesa: {ex.Message}");
             }
         }
-
-        //public void AgregarPlatoPedidoParaMesa(string nombrePlato, ENumeroDeMesa mesa)
-        //{
-        //    Plato platoEncontrado = null;
-        //    foreach (Plato plato in PlatosDisponibles)
-        //    {
-        //        if (nombrePlato == plato.Nombre)
-        //        {
-        //            platoEncontrado = plato;                    
-        //        }
-        //    }
-        //    try
-        //    {
-        //        if (platoEncontrado != null)
-        //        {
-        //            if(!platosPorMesa.ContainsKey(mesa))
-        //            {
-        //                platosPorMesa[mesa] = new List<Plato>();
-        //            }
-        //            platosPorMesa[mesa].Add(platoEncontrado);                    
-        //            Console.WriteLine($"Platos '{platoEncontrado.Nombre}' agregados a mesa {(int)mesa}.");
-        //        }
-        //        else
-        //        {
-        //            Console.WriteLine($"Plato '{nombrePlato}' no encontrado en el menú o mesa no válida.");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine($"Error al agregar plato: {ex.Message}");
-        //    }            
-        //}
+       
         public void AgregarPlatoPedidoParaMesa(string nombrePlato, ENumeroDeMesa mesa)
         {
             Plato platoEncontrado = null;
@@ -256,22 +231,52 @@ namespace Logica
             throw new Exception($"Empleado con nombre {nombre} no encontrado.");
         }
 
+        //public void CalcularConsumoTotal()
+        //{
+        //    double consumoTotal = 0;
+
+        //    foreach (Mesa mesa in Mesas)
+        //    {
+        //        if (mesa.Platos != null)
+        //        {
+        //            foreach (Plato plato in mesa.Platos)
+        //            {
+        //                consumoTotal += plato.Precio;
+        //                mesa.EstadoMesa = true;
+        //            }
+        //            foreach (Bebida bebida in mesa.Bebidas)
+        //            {
+        //                consumoTotal += bebida.Precio;
+        //                mesa.EstadoMesa = true;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine($"La mesa {(int)mesa.EnumeroDeMesa} no tiene platos asignados.");
+        //        }
+        //    }            
+        //    arcas += consumoTotal;
+        //    Console.WriteLine($"Total recaudado hoy: {consumoTotal}");
+        //    Console.WriteLine($"Arcas actuales: {arcas}");
+        //}
+
         public void CalcularConsumoTotal()
         {
             double consumoTotal = 0;
 
             foreach (Mesa mesa in Mesas)
             {
+                double consumoMesa = 0;
                 if (mesa.Platos != null)
                 {
                     foreach (Plato plato in mesa.Platos)
                     {
-                        consumoTotal += plato.Precio;
+                        consumoMesa += plato.Precio;
                         mesa.EstadoMesa = true;
                     }
                     foreach (Bebida bebida in mesa.Bebidas)
                     {
-                        consumoTotal += bebida.Precio;
+                        consumoMesa += bebida.Precio;
                         mesa.EstadoMesa = true;
                     }
                 }
@@ -279,10 +284,70 @@ namespace Logica
                 {
                     Console.WriteLine($"La mesa {(int)mesa.EnumeroDeMesa} no tiene platos asignados.");
                 }
-            }            
+                mesa.TotalVentas = consumoMesa;
+                consumoTotal += consumoMesa;
+            }
             arcas += consumoTotal;
             Console.WriteLine($"Total recaudado hoy: {consumoTotal}");
             Console.WriteLine($"Arcas actuales: {arcas}");
+        }
+
+        public void MostrarTop3Ventas()
+        {
+            var top3Ventas = new List<(string Nombre, double TotalVentas, bool EsDelivery)>();
+
+            // Rellenar la lista con los datos de las ventas
+            foreach (var mesa in Mesas)
+            {
+                top3Ventas.Add((mesa.Mesero.Nombre, mesa.TotalVentas, mesa.Mesero.Rol == ERol.Delivery));
+            }
+
+            for (int i = 0; i < top3Ventas.Count - 1; i++)
+            {
+                for (int j = i + 1; j < top3Ventas.Count; j++)
+                {
+                    if (top3Ventas[i].TotalVentas < top3Ventas[j].TotalVentas)
+                    {
+                        var temp = top3Ventas[i];
+                        top3Ventas[i] = top3Ventas[j];
+                        top3Ventas[j] = temp;
+                    }
+                }
+            }
+
+            var top3 = new List<(string Nombre, double TotalVentas, bool EsDelivery)>();
+
+            int count = 0;
+            foreach (var item in top3Ventas)
+            {
+                if (count < 3)
+                {
+                    top3.Add(item);
+                    count++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            Console.WriteLine("Top 3 de ventas (incluye meseros y delivery):");
+
+            int posicion = 1;
+            foreach (var item in top3)
+            {
+                string tipo;
+                if (item.EsDelivery)
+                {
+                    tipo = "Delivery";
+                }
+                else
+                {
+                    tipo = "Mesero";
+                }
+                Console.WriteLine($"{posicion}. {item.Nombre} ({tipo}): {item.TotalVentas}");
+                posicion++;
+            }
         }
 
         public void CalcularConsumoDelivery()

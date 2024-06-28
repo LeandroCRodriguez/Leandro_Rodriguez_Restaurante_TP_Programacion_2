@@ -8,7 +8,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Logica
 {
-    public enum EMedioDePago
+    public enum EMedioDePagoProveedor
     {
         Contado,
         Efectivo,
@@ -28,11 +28,11 @@ namespace Logica
         string cuit;
         string direccion;
         string tipoDeProducto;
-        EMedioDePago medioDePago;
+        EMedioDePagoProveedor medioDePago;
         EDiasDeLaSemana ediasDeLaSemana;
 
         public Proveedor(string nombre, string cuit, string direccion, string tipoDeProducto, 
-            EMedioDePago medioDePago, EDiasDeLaSemana ediasDeLaSemana)
+            EMedioDePagoProveedor medioDePago, EDiasDeLaSemana ediasDeLaSemana)
         {
             this.nombre = nombre;
             this.cuit = cuit;
@@ -47,7 +47,7 @@ namespace Logica
         public string Cuit { get { return cuit; } set { cuit = value; } }
         public string Direccion { get { return direccion; } set { direccion = value; } }
         public string TipoDeProducto { get { return tipoDeProducto; } set { tipoDeProducto = value; } }
-        public EMedioDePago MedioDePago { get { return medioDePago; } set { medioDePago = value; } }
+        public EMedioDePagoProveedor MedioDePago { get { return medioDePago; } set { medioDePago = value; } }
         public EDiasDeLaSemana EdiasDeLaSemana { get { return ediasDeLaSemana; } set { ediasDeLaSemana = value; } }
 
         public double? CuentaCorriente { get; internal set; }

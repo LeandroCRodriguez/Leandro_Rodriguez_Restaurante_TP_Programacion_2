@@ -14,7 +14,7 @@ namespace Restaurante
             menuDisponible.MostrarMenu();
 
             //INGRESAR PRODUCTOS Y PAGARLE AL PROVEEDOR. YA LO PROBÉ CON FONDOS INSUFICIENTES
-            Proveedor pescaderiaLosPollosHermanos = new Proveedor("Pescaderia los Pollos Hermanos", "555222", "La pampa 244", "Merluza", EMedioDePago.Efectivo, EDiasDeLaSemana.Jueves);
+            Proveedor pescaderiaLosPollosHermanos = new Proveedor("Pescaderia los Pollos Hermanos", "555222", "La pampa 244", "Merluza", EMedioDePagoProveedor.Efectivo, EDiasDeLaSemana.Jueves);
             Producto merluza = new Producto(200, "Merluza", new Stock(pescaderiaLosPollosHermanos, 5000));
             restaurante.StockProductos.Add(merluza);
             restaurante.PagarProveedor(merluza);
@@ -68,7 +68,7 @@ namespace Restaurante
 
             //MOSTRAR PLATOS POR PRODUCTO
             PlatoService platoService = new PlatoService();
-            Proveedor carniceriaElSeniorDeLosNovillos = new Proveedor("Carniceria El Señor de los Novillos", "123456", "Ayacucho 322", "Carne", EMedioDePago.Transferencia, EDiasDeLaSemana.Martes);
+            Proveedor carniceriaElSeniorDeLosNovillos = new Proveedor("Carniceria El Señor de los Novillos", "123456", "Ayacucho 322", "Carne", EMedioDePagoProveedor.Transferencia, EDiasDeLaSemana.Martes);
             Producto bolaDeLomo = new Producto(200, "Bola de lomo", new Stock(carniceriaElSeniorDeLosNovillos, 5000));
             Ingrediente ingredienteLomo = new Ingrediente(bolaDeLomo, 50);
             List<Plato> platosPorIngrediente = platoService.GetPlatosPorIngrediente(ingredienteLomo, restaurante.PlatosDisponibles);
@@ -118,6 +118,9 @@ namespace Restaurante
             //PAGAR SUELDOS A EMPLEADOS POR ORDEN
             restaurante.PagarSueldosAEmpleados(lele);
 
+
+            restaurante.MostrarTop3Ventas();
+
             //FUNCIONALIDADES
             //Ingresar Productos ✓
             //Descontar productos cuando se sirven en la mesa  ✓
@@ -134,7 +137,7 @@ namespace Restaurante
             //consumo Delivery y mesero ✓
             //consumo no pago 
             //consumo por medio de pago
-            //Top 3 ventas
+            //Top 3 ventas✓
         }
     }
 }
