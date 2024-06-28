@@ -39,7 +39,6 @@
                 throw new RolNoCompatibleExcepcion("El Rol del Empleado no tiene acceso a la solicitud");
             }
         }
-        //Ver si está bien este metodo
         public void RealizarEgresoStock(Plato plato, List<Producto> stockProductos) 
         {
             foreach (Ingrediente ingrediente in plato.Ingredientes)

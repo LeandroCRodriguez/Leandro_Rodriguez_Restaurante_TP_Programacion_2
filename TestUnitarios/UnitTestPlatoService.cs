@@ -15,10 +15,9 @@ namespace TestUnitarios
         {
             Empleado pepe = new Empleado("Pepe", "Gomez", 1587459865, "Abc123", 123456, ERol.Cocinero);
             PlatoService platoService = new PlatoService();
-            Plato platoCreado = platoService.CrearPlato(pepe, 160, "Lasagna de ricota y verduras", 50);
+            Plato platoCreado = platoService.CrearPlato(pepe,"Lasagna de ricota y verduras", 50);
 
             Assert.IsNotNull(platoCreado, "El plato creado no debería ser nulo.");
-            Assert.AreEqual(160, platoCreado.Precio, "El precio del plato no es correcto.");
             Assert.AreEqual("Lasagna de ricota y verduras", platoCreado.Nombre, "El nombre del plato no es correcto.");
             Assert.AreEqual(50, platoCreado.TiempoDePreparacion, "El tiempo de preparación del plato no es correcto.");
         }
@@ -26,7 +25,18 @@ namespace TestUnitarios
         [TestMethod]
         public void EditarPlato_DeberiaEditarUnPlatoExistente()
         {
-            
+            Empleado pepe = new Empleado("Pepe", "Gomez", 1587459865, "Abc123", 123456, ERol.Cocinero);
+            PlatoService platoService = new PlatoService();
+            MiRestaurante restaurante = new MiRestaurante(2000);
+            Plato milaConPure = new Plato(145, "Milanesa con pure", 30);
+            milaConPure.AgregarIngrediente(new Ingrediente(new Producto("Bola de lomo"), 200));
+            milaConPure.AgregarIngrediente(new Ingrediente(new Producto("Papa"), 200));
+            restaurante.PlatosDisponibles.Add(milaConPure);
+            Plato milaConPureEditada = platoService.EditarPlato(pepe, "Milanesa con pure", 20, restaurante.PlatosDisponibles);
+
+            Assert.IsNotNull(milaConPureEditada, "El plato creado no debería ser nulo.");
+            Assert.AreEqual("Milanesa con pure", milaConPureEditada.Nombre, "El nombre del plato no es correcto.");
+            Assert.AreEqual(20, milaConPureEditada.TiempoDePreparacion, "El tiempo de preparación del plato no es correcto.");
         }
 
         [TestMethod]
@@ -103,9 +113,51 @@ namespace TestUnitarios
             Assert.IsTrue(platosNoDisponibles.Contains(polloConEnsalada), "El plato 'Pollo con ensalada' debería estar en la lista de platos no disponibles debido al stock insuficiente de tomate.");
             Assert.AreEqual(1, platosNoDisponibles.Count, "Debería haber 1 plato no disponible debido al stock insuficiente.");
         }
+        [TestMethod]
+        [ExpectedException(typeof(RolNoCompatibleExcepcion))]
+        public void CrearPlato_DeberiaLanzarExcepcionSiRolNoEsCocinero()
+        {
+            Empleado mesero = new Empleado("Juan", "Pérez", 123456789, "contraseña123", 123456, ERol.Mesero);
+            PlatoService platoService = new PlatoService();
 
+            platoService.CrearPlato(mesero, "Ensalada", 15);
 
+            // Si llega aquí, la prueba falla
+            Assert.Fail("Se esperaba una excepción de tipo RolNoCompatibleExcepcion.");
+        }
 
+        [TestMethod]
+        [ExpectedException(typeof(RolNoCompatibleExcepcion))]
+        public void EditarPlato_DeberiaLanzarExcepcionSiRolNoEsCocinero()
+        {
+            Empleado mesero = new Empleado("Juan", "Pérez", 123456789, "contraseña123", 123456, ERol.Mesero);
+            PlatoService platoService = new PlatoService();
+            List<Plato> platos = new List<Plato>
+            {
+                new Plato("Ensalada", 15)
+            };
 
+            platoService.EditarPlato(mesero, "Ensalada", 20, platos);
+
+            // Si llega aquí, la prueba falla
+            Assert.Fail("Se esperaba una excepción de tipo RolNoCompatibleExcepcion.");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(RolNoCompatibleExcepcion))]
+        public void EliminarPlato_DeberiaLanzarExcepcionSiRolNoEsCocinero()
+        {
+            Empleado mesero = new Empleado("Juan", "Pérez", 123456789, "contraseña123", 123456, ERol.Mesero);
+            PlatoService platoService = new PlatoService();
+            List<Plato> platos = new List<Plato>
+            {
+                new Plato("Ensalada", 15)
+            };
+
+            platoService.EliminarPlato(platos[0], mesero, platos);
+
+            // Si llega aquí, la prueba falla
+            Assert.Fail("Se esperaba una excepción de tipo RolNoCompatibleExcepcion.");
+        }
     }
 }

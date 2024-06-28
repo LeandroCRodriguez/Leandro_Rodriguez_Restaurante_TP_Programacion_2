@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -20,13 +21,8 @@ namespace Logica
         public double arcas { get; set; }
 
         private Dictionary<ENumeroDeMesa, List<Plato>> platosPorMesa;
-
+        private Dictionary<ENumeroDeMesa, List<Bebida>> bebidasPorMesa;
         
-        private List<Plato> platosMesaUno;
-        private List<Plato> platosMesaDos;
-        private List<Plato> platosMesaTres;
-        private List<Plato> platosMesaCuatro;
-        private List<Plato> platosMesaCinco;
 
 
         public MiRestaurante(double arcas)
@@ -46,6 +42,14 @@ namespace Logica
                 { ENumeroDeMesa.Mesa3, new List<Plato>() },
                 { ENumeroDeMesa.Mesa4, new List<Plato>() },
                 { ENumeroDeMesa.Mesa5, new List<Plato>() }
+            };
+            bebidasPorMesa = new Dictionary<ENumeroDeMesa, List<Bebida>>
+            {
+                { ENumeroDeMesa.Mesa1, new List<Bebida>() },
+                { ENumeroDeMesa.Mesa2, new List<Bebida>() },
+                { ENumeroDeMesa.Mesa3, new List<Bebida>() },
+                { ENumeroDeMesa.Mesa4, new List<Bebida>() },
+                { ENumeroDeMesa.Mesa5, new List<Bebida>() }
             };
         }
 
@@ -120,13 +124,13 @@ namespace Logica
         public void AsignarMesas()
         {
             try
-            {
+            {                
                 MesaService mesaService = new MesaService();
-                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa1, 4, ObtenerEmpleadoPorNombre("Churita"), platosPorMesa[ENumeroDeMesa.Mesa1], Bebidas, StockProductos, PlatosDisponibles));
-                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa2, 4, ObtenerEmpleadoPorNombre("Churita"), platosPorMesa[ENumeroDeMesa.Mesa2], Bebidas, StockProductos, PlatosDisponibles));
-                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa3, 4, ObtenerEmpleadoPorNombre("Verónica"), platosPorMesa[ENumeroDeMesa.Mesa3], Bebidas, StockProductos, PlatosDisponibles));
-                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa4, 4, ObtenerEmpleadoPorNombre("Verónica"), platosPorMesa[ENumeroDeMesa.Mesa4], Bebidas, StockProductos, PlatosDisponibles));
-                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa5, 4, ObtenerEmpleadoPorNombre("Augusto"), platosPorMesa[ENumeroDeMesa.Mesa5], Bebidas, StockProductos, PlatosDisponibles));
+                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa1, 4, ObtenerEmpleadoPorNombre("Churita"), platosPorMesa[ENumeroDeMesa.Mesa1], Bebidas, StockProductos));
+                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa2, 4, ObtenerEmpleadoPorNombre("Churita"), platosPorMesa[ENumeroDeMesa.Mesa2], Bebidas, StockProductos));
+                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa3, 4, ObtenerEmpleadoPorNombre("Verónica"), platosPorMesa[ENumeroDeMesa.Mesa3], Bebidas, StockProductos));
+                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa4, 4, ObtenerEmpleadoPorNombre("Verónica"), platosPorMesa[ENumeroDeMesa.Mesa4], Bebidas, StockProductos));
+                Mesas.Add(mesaService.AsignarPlatoAMesa(ENumeroDeMesa.Mesa5, 4, ObtenerEmpleadoPorNombre("Augusto"), platosPorMesa[ENumeroDeMesa.Mesa5], Bebidas, StockProductos));   
             }
             catch (Exception ex)
             {
@@ -134,7 +138,37 @@ namespace Logica
             }
         }
 
-
+        //public void AgregarPlatoPedidoParaMesa(string nombrePlato, ENumeroDeMesa mesa)
+        //{
+        //    Plato platoEncontrado = null;
+        //    foreach (Plato plato in PlatosDisponibles)
+        //    {
+        //        if (nombrePlato == plato.Nombre)
+        //        {
+        //            platoEncontrado = plato;                    
+        //        }
+        //    }
+        //    try
+        //    {
+        //        if (platoEncontrado != null)
+        //        {
+        //            if(!platosPorMesa.ContainsKey(mesa))
+        //            {
+        //                platosPorMesa[mesa] = new List<Plato>();
+        //            }
+        //            platosPorMesa[mesa].Add(platoEncontrado);                    
+        //            Console.WriteLine($"Platos '{platoEncontrado.Nombre}' agregados a mesa {(int)mesa}.");
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine($"Plato '{nombrePlato}' no encontrado en el menú o mesa no válida.");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error al agregar plato: {ex.Message}");
+        //    }            
+        //}
         public void AgregarPlatoPedidoParaMesa(string nombrePlato, ENumeroDeMesa mesa)
         {
             Plato platoEncontrado = null;
@@ -142,19 +176,30 @@ namespace Logica
             {
                 if (nombrePlato == plato.Nombre)
                 {
-                    platoEncontrado = plato;                    
+                    platoEncontrado = plato;
                 }
             }
             try
             {
                 if (platoEncontrado != null)
                 {
-                    if(!platosPorMesa.ContainsKey(mesa))
+                    bool mesaEncontrada = false;
+                    foreach (var key in platosPorMesa.Keys)
+                    {
+                        if (key == mesa)
+                        {
+                            mesaEncontrada = true;
+                            break;
+                        }
+                    }
+
+                    if (!mesaEncontrada)
                     {
                         platosPorMesa[mesa] = new List<Plato>();
                     }
-                    platosPorMesa[mesa].Add(platoEncontrado);                    
-                    Console.WriteLine($"Platos '{platoEncontrado.Nombre}' agregados a mesa {(int)mesa}.");
+
+                    platosPorMesa[mesa].Add(platoEncontrado);
+                    Console.WriteLine($"Plato '{platoEncontrado.Nombre}' agregado a mesa {(int)mesa}.");
                 }
                 else
                 {
@@ -164,7 +209,39 @@ namespace Logica
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al agregar plato: {ex.Message}");
-            }            
+            }
+        }
+
+        public void AgregarBebidaPedidoParaMesa(string nombreBebida, ENumeroDeMesa mesa)
+        {
+            Bebida bebidaEncontrada = null;
+            foreach (Bebida bebida in Bebidas)
+            {
+                if (nombreBebida == bebida.Nombre)
+                {
+                    bebidaEncontrada = bebida;
+                }
+            }
+            try
+            {
+                if (bebidaEncontrada != null)
+                {
+                    if (!bebidasPorMesa.ContainsKey(mesa))
+                    {
+                        bebidasPorMesa[mesa] = new List<Bebida>();
+                    }
+                    bebidasPorMesa[mesa].Add(bebidaEncontrada);
+                    Console.WriteLine($"Platos '{bebidaEncontrada.Nombre}' agregados a mesa {(int)mesa}.");
+                }
+                else
+                {
+                    Console.WriteLine($"Plato '{nombreBebida}' no encontrado en el menú o mesa no válida.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al agregar la bebida: {ex.Message}");
+            }
         }
         
         public Empleado ObtenerEmpleadoPorNombre(string nombre)
@@ -190,13 +267,19 @@ namespace Logica
                     foreach (Plato plato in mesa.Platos)
                     {
                         consumoTotal += plato.Precio;
+                        mesa.EstadoMesa = true;
+                    }
+                    foreach (Bebida bebida in mesa.Bebidas)
+                    {
+                        consumoTotal += bebida.Precio;
+                        mesa.EstadoMesa = true;
                     }
                 }
                 else
                 {
                     Console.WriteLine($"La mesa {(int)mesa.EnumeroDeMesa} no tiene platos asignados.");
                 }
-            }
+            }            
             arcas += consumoTotal;
             Console.WriteLine($"Total recaudado hoy: {consumoTotal}");
             Console.WriteLine($"Arcas actuales: {arcas}");
@@ -214,6 +297,10 @@ namespace Logica
                         foreach (Plato plato in mesa.Platos)
                         {
                             consumoTotalDelivery += plato.Precio;
+                        }
+                        foreach (Bebida bebida in mesa.Bebidas)
+                        {
+                            consumoTotalDelivery += bebida.Precio;
                         }
                     }
                     else

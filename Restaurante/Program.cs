@@ -40,6 +40,11 @@ namespace Restaurante
             restaurante.AgregarPlatoPedidoParaMesa("Fideos con bolognesa", ENumeroDeMesa.Mesa4);
             restaurante.AgregarPlatoPedidoParaMesa("Milanesa con pure", ENumeroDeMesa.Mesa5);
             restaurante.AgregarPlatoPedidoParaMesa("Fideos con bolognesa", ENumeroDeMesa.Mesa5);
+            restaurante.AgregarBebidaPedidoParaMesa("Coca", ENumeroDeMesa.Mesa1);
+            restaurante.AgregarBebidaPedidoParaMesa("Cerveza", ENumeroDeMesa.Mesa2);
+            restaurante.AgregarBebidaPedidoParaMesa("agua con gas", ENumeroDeMesa.Mesa3);
+            restaurante.AgregarBebidaPedidoParaMesa("agua", ENumeroDeMesa.Mesa4);
+            restaurante.AgregarBebidaPedidoParaMesa("vino", ENumeroDeMesa.Mesa5);
 
             // ASIGNAR MESAS
             //Dentro de este método llamo a  AsignarPlatoAMesa() y ahi
@@ -52,6 +57,7 @@ namespace Restaurante
             {
                 Console.WriteLine(stock.MostrarProducto());
             }
+
             //MOSTRAR PRODUCTOS POR AGOTARSE
             List<Producto> stockPorAgotarse = stockService.ConsultarStockPorAgotarse(restaurante.StockProductos);
             Console.WriteLine("PRODUCTOS POR AGOTARSE");
@@ -118,7 +124,7 @@ namespace Restaurante
             //Consulta stock vigente ✓
             //Consulta stock por agotarse ✓
             //COMIDA
-            //ABM Platos ✓ Faltaría ver el metodo EliminarPlato() ✓
+            //ABM Platos ✓ 
             //Consulta platos por producto ✓
             //Consulta platos disponibles ✓
             //CONTABILIDAD

@@ -34,13 +34,12 @@ namespace TestUnitarios
 
             MesaService mesaService = new MesaService();
 
-            Mesa mesaAsignada = mesaService.AsignarPlatoAMesa(numeroMesa, capacidad, veronica, platosAsignados, bebidasAsignadas, stockProductos, platosDisponibles);
+            Mesa mesaAsignada = mesaService.AsignarPlatoAMesa(numeroMesa, capacidad, veronica, platosAsignados, bebidasAsignadas, stockProductos);
 
             Assert.IsNotNull(mesaAsignada, "La mesa debería ser asignada correctamente.");
             Assert.AreEqual(numeroMesa, mesaAsignada.EnumeroDeMesa, "El número de mesa asignado no es correcto.");
             Assert.AreEqual(capacidad, mesaAsignada.Capacidad, "La capacidad de la mesa asignada no es correcta.");
             Assert.AreEqual(veronica, mesaAsignada.Mesero, "El mesero asignado no es correcto.");
-        }
-        // Hacer test para los casos que sí, que no, y los casos de borde
+        }        
     }
 }

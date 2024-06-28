@@ -21,7 +21,6 @@ namespace Logica
             this.proveedor = proveedor;
             this.cantidad = cantidad;
         }
-
         public Proveedor Proveedor { get => proveedor; set => proveedor = value; }
         public int Cantidad { get => cantidad; set => cantidad = value; }
     }
